@@ -1,0 +1,84 @@
+{% extends 'base.html' %}
+{% block content %}
+<div class="row justify-content-center">
+    <div class="col-md-7">
+
+        <div class="mb-3">
+            <button onclick="history.back()" class="btn btn-secondary">
+                <i class="fas fa-arrow-left me-2"></i>Back
+            </button>
+        </div>
+
+        <div class="card p-4 mt-4">
+            <h3 class="text-center text-danger mb-4"><i class="fas fa-user-injured me-2"></i>Register as Patient</h3>
+            <form method="POST">
+                {% csrf_token %}
+                <div class="row">
+                    <div class="col-md-6 mb-3">
+                        <label class="form-label fw-semibold">First Name</label>
+                        <input type="text" name="first_name" class="form-control" placeholder="First Name" required>
+                    </div>
+                    <div class="col-md-6 mb-3">
+                        <label class="form-label fw-semibold">Last Name</label>
+                        <input type="text" name="last_name" class="form-control" placeholder="Last Name" required>
+                    </div>
+                </div>
+                <div class="mb-3">
+                    <label class="form-label fw-semibold">Username</label>
+                    <input type="text" name="username" class="form-control" placeholder="Username" required>
+                </div>
+                <div class="mb-3">
+                    <label class="form-label fw-semibold">Email</label>
+                    <input type="email" name="email" class="form-control" placeholder="Email" required>
+                </div>
+                <div class="row">
+                    <div class="col-md-6 mb-3">
+                        <label class="form-label fw-semibold">Password</label>
+                        <input type="password" name="password" class="form-control" placeholder="Password" required>
+                    </div>
+                    <div class="col-md-6 mb-3">
+                        <label class="form-label fw-semibold">Confirm Password</label>
+                        <input type="password" name="confirm_password" class="form-control" placeholder="Confirm Password" required>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-6 mb-3">
+                        <label class="form-label fw-semibold">Blood Group</label>
+                        <select name="blood_group" class="form-control" required>
+                            <option value="">Select</option>
+                            <option>A+</option><option>A-</option>
+                            <option>B+</option><option>B-</option>
+                            <option>AB+</option><option>AB-</option>
+                            <option>O+</option><option>O-</option>
+                        </select>
+                    </div>
+                    <div class="col-md-6 mb-3">
+                        <label class="form-label fw-semibold">Age</label>
+                        <input type="number" name="age" class="form-control" placeholder="Age" min="1" required>
+                    </div>
+                </div>
+                <div class="mb-3">
+                    <label class="form-label fw-semibold">Phone</label>
+                    <input type="text" name="phone" class="form-control" placeholder="Phone Number" required>
+                </div>
+                <div class="mb-3">
+                    <label class="form-label fw-semibold">Doctor Name</label>
+                    <input type="text" name="doctor_name" class="form-control" placeholder="Doctor Name" required>
+                </div>
+                <div class="mb-3">
+                    <label class="form-label fw-semibold">Hospital</label>
+                    <input type="text" name="hospital" class="form-control" placeholder="Hospital Name" required>
+                </div>
+                <div class="mb-3">
+                    <label class="form-label fw-semibold">Address</label>
+                    <textarea name="address" class="form-control" rows="3" placeholder="Full Address" required></textarea>
+                </div>
+                <button type="submit" class="btn btn-danger w-100">Register as Patient</button>
+            </form>
+            <p class="text-center mt-3 text-muted small">Already have an account? <a href="/login/">Login</a></p>
+        </div>
+    </div>
+</div>
+{% endblock %}
+
+
