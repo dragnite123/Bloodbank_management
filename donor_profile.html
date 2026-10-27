@@ -1,0 +1,86 @@
+{% extends 'base.html' %}
+{% block content %}
+<div class="row justify-content-center">
+    <div class="col-md-7">
+        <div class="card mt-4">
+            <div class="card-header-red text-center">
+                <i class="fas fa-user-circle fa-2x mb-2"></i>
+                <h4 class="mb-0 fw-bold">My Profile</h4>
+                <small style="opacity:0.8;">{{ donor.username }}</small>
+            </div>
+            <div class="card-body p-4">
+                <form method="POST">
+                    {% csrf_token %}
+                    <div class="row">
+                        <div class="col-md-6 mb-3">
+                            <label class="form-label">Full Name</label>
+                            <div class="input-group">
+                                <span class="input-group-text"><i class="fas fa-user"></i></span>
+                                <input type="text" name="full_name" class="form-control" value="{{ donor.full_name }}" required>
+                            </div>
+                        </div>
+                        <div class="col-md-6 mb-3">
+                            <label class="form-label">Email</label>
+                            <div class="input-group">
+                                <span class="input-group-text"><i class="fas fa-envelope"></i></span>
+                                <input type="email" name="email" class="form-control" value="{{ donor.email }}" required>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-6 mb-3">
+                            <label class="form-label">Phone</label>
+                            <div class="input-group">
+                                <span class="input-group-text"><i class="fas fa-phone"></i></span>
+                                <input type="text" name="phone" class="form-control" value="{{ donor.phone }}" required>
+                            </div>
+                        </div>
+                        <div class="col-md-6 mb-3">
+                            <label class="form-label">Blood Group</label>
+                            <div class="input-group">
+                                <span class="input-group-text"><i class="fas fa-tint"></i></span>
+                                <input type="text" class="form-control" value="{{ donor.blood_group }}" disabled>
+                            </div>
+                            <small class="text-muted">Blood group cannot be changed</small>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-6 mb-3">
+                            <label class="form-label">Age</label>
+                            <div class="input-group">
+                                <span class="input-group-text"><i class="fas fa-birthday-cake"></i></span>
+                                <input type="text" class="form-control" value="{{ donor.age }}" disabled>
+                            </div>
+                        </div>
+                        <div class="col-md-6 mb-3">
+                            <label class="form-label">Weight (kg)</label>
+                            <div class="input-group">
+                                <span class="input-group-text"><i class="fas fa-weight"></i></span>
+                                <input type="text" class="form-control" value="{{ donor.weight }}" disabled>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="mb-4">
+                        <label class="form-label">Address</label>
+                        <div class="input-group">
+                            <span class="input-group-text"><i class="fas fa-map-marker-alt"></i></span>
+                            <textarea name="address" class="form-control" rows="2">{{ donor.address }}</textarea>
+                        </div>
+                    </div>
+                    <button type="submit" class="btn-red w-100 py-2">
+                        <i class="fas fa-save me-2"></i>Save Changes
+                    </button>
+
+                <a href="/donor/change-password/" class="btn-outline-red w-100 py-2 text-decoration-none text-center d-block mt-3">
+    <i class="fas fa-lock me-2"></i>Change Password
+</a>
+
+                </form>
+                <p class="text-center mt-3 small text-muted">
+                    <a href="/donor-dashboard/" style="color:#b71c1c;">← Back to Dashboard</a>
+                </p>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
