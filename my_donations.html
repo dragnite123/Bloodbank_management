@@ -1,0 +1,59 @@
+{% extends 'base.html' %}
+{% block content %}
+
+<div class="d-flex justify-content-between align-items-center mb-4">
+    <div>
+        <h4 class="fw-bold mb-0" style="color:#b71c1c;"><i class="fas fa-list me-2"></i>My Donations</h4>
+        <small class="text-muted">{{ donor.full_name }}</small>
+    </div>
+    {% if donor.is_approved %}
+    <a href="/donor/donate/" class="btn-red px-4 py-2 text-decoration-none rounded-pill">
+        <i class="fas fa-plus me-1"></i>New Donation
+    </a>
+    {% endif %}
+</div>
+
+ <p class="text-center mt-3 small text-muted">
+                    <a href="/donor-dashboard/" style="color:#b71c1c;">← Back to Dashboard</a>
+                </p>
+
+<div class="card">
+    <div class="card-body p-0">
+        <table class="table table-hover mb-0">
+            <thead style="background:#ffeaea;">
+                <tr>
+                    <th class="ps-3">#</th>
+                    <th>Blood Group</th>
+                    <th>Units</th>
+                    <th>Date</th>
+                    <th>Status</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for don in donations %}
+                <tr>
+                    <td class="ps-3">{{ forloop.counter }}</td>
+                    <td><span class="badge" style="background:#ffeaea;color:#b71c1c;">{{ don.blood_group }}</span></td>
+                    <td>{{ don.units }}</td>
+                    <td><small>{{ don.date_requested|date:"d M Y" }}</small></td>
+                    <td>
+                        <span class="badge bg-{% if don.status == 'Approved' %}success{% elif don.status == 'Rejected' %}danger{% else %}warning{% endif %}">
+                            {{ don.status }}
+                        </span>
+                    </td>
+                </tr>
+                {% empty %}
+                <tr>
+                    <td colspan="5" class="text-center text-muted py-4">
+                        No donations yet.
+                        {% if donor.is_approved %}
+                            <a href="/donor/donate/" style="color:#b71c1c;">Donate now</a>
+                        {% endif %}
+                    </td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+</div>
+{% endblock %}
