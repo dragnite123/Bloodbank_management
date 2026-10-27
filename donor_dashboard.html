@@ -1,0 +1,204 @@
+{% extends 'base.html' %}
+{% block content %}
+
+<div class="d-flex justify-content-between align-items-center mb-4">
+    <div>
+        <h4 class="fw-bold mb-0" style="color:#b71c1c;"><i class="fas fa-tachometer-alt me-2"></i>Donor Dashboard</h4>
+        <small class="text-muted">Welcome, {{ donor.full_name }}</small>
+    </div>
+    <span class="badge px-3 py-2" style="background:#ffeaea; color:#b71c1c; font-size:0.85rem;">
+        <i class="fas fa-tint me-1"></i>{{ donor.blood_group }}
+    </span>
+</div>
+
+  <div class="mb-3">
+            <button onclick="history.back()" class="btn btn-secondary">
+                <i class="fas fa-arrow-left me-2"></i>Back
+            </button>
+        </div>
+
+<!-- APPROVAL WARNING -->
+{% if not donor.is_approved %}
+<div class="alert alert-warning mb-4">
+    <i class="fas fa-exclamation-triangle me-2"></i>
+    Your account is <strong>pending admin approval</strong>. You cannot submit donations until approved.
+</div>
+{% endif %}
+
+<!-- STAT CARDS -->
+<div class="row g-4 mb-4">
+    <div class="col-md-3 col-6">
+        <div class="stat-card" style="background:linear-gradient(135deg,#b71c1c,#e53935);">
+            <i class="fas fa-hand-holding-heart"></i>
+            <h3>{{ total_donations }}</h3>
+            <p>Total Donations</p>
+        </div>
+    </div>
+    <div class="col-md-3 col-6">
+        <div class="stat-card" style="background:linear-gradient(135deg,#e65100,#fb8c00);">
+            <i class="fas fa-clock"></i>
+            <h3>{{ pending_donations }}</h3>
+            <p>Pending</p>
+        </div>
+    </div>
+    <div class="col-md-3 col-6">
+        <div class="stat-card" style="background:linear-gradient(135deg,#2e7d32,#43a047);">
+            <i class="fas fa-check-circle"></i>
+            <h3>{{ approved_donations }}</h3>
+            <p>Approved</p>
+        </div>
+    </div>
+    <div class="col-md-3 col-6">
+        <div class="stat-card" style="background:linear-gradient(135deg,#c62828,#e53935);">
+            <i class="fas fa-times-circle"></i>
+            <h3>{{ rejected_donations }}</h3>
+            <p>Rejected</p>
+        </div>
+    </div>
+</div>
+
+<!-- QUICK ACTIONS -->
+<div class="card mb-4">
+    <div class="card-header-red">
+        <h6 class="mb-0 fw-bold"><i class="fas fa-bolt me-2"></i>Quick Actions</h6>
+    </div>
+    <div class="card-body p-4">
+        <div class="row g-3">
+            {% if donor.is_approved %}
+            <div class="col-md-4 col-6">
+                <a href="/donor/donate/" class="btn-red d-block text-center py-3 text-decoration-none rounded-3">
+                    <i class="fas fa-hand-holding-heart fa-lg d-block mb-1"></i>Donate Blood
+                </a>
+            </div>
+            {% endif %}
+            <div class="col-md-4 col-6">
+                <a href="/donor/my-donations/" class="btn-outline-red d-block text-center py-3 text-decoration-none rounded-3">
+                    <i class="fas fa-list fa-lg d-block mb-1"></i>My Donations
+                </a>
+            </div>
+            <div class="col-md-4 col-6">
+                <a href="/donor/profile/" class="btn-red d-block text-center py-3 text-decoration-none rounded-3">
+                    <i class="fas fa-user fa-lg d-block mb-1"></i>My Profile
+                </a>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- DONOR INFO CARD -->
+<div class="card mb-4">
+    <div class="card-header-red">
+        <h6 class="mb-0 fw-bold"><i class="fas fa-id-card me-2"></i>My Information</h6>
+    </div>
+    <div class="card-body p-4">
+        <div class="row">
+            <div class="col-md-3 col-6 mb-3">
+                <small class="text-muted d-block">Full Name</small>
+                <strong>{{ donor.full_name }}</strong>
+            </div>
+            <div class="col-md-3 col-6 mb-3">
+                <small class="text-muted d-block">Blood Group</small>
+                <strong style="color:#b71c1c;">{{ donor.blood_group }}</strong>
+            </div>
+            <div class="col-md-3 col-6 mb-3">
+                <small class="text-muted d-block">Age</small>
+                <strong>{{ donor.age }} years</strong>
+            </div>
+            <div class="col-md-3 col-6 mb-3">
+                <small class="text-muted d-block">Weight</small>
+                <strong>{{ donor.weight }} kg</strong>
+            </div>
+            <div class="col-md-3 col-6 mb-3">
+                <small class="text-muted d-block">Phone</small>
+                <strong>{{ donor.phone }}</strong>
+            </div>
+            <div class="col-md-3 col-6 mb-3">
+                <small class="text-muted d-block">Email</small>
+                <strong>{{ donor.email }}</strong>
+            </div>
+            <div class="col-md-3 col-6 mb-3">
+                <small class="text-muted d-block">Status</small>
+                {% if donor.is_approved %}
+                    <span class="badge bg-success">Approved</span>
+                {% else %}
+                    <span class="badge bg-warning">Pending Approval</span>
+                {% endif %}
+            </div>
+            <div class="col-md-3 col-6 mb-3">
+                <small class="text-muted d-block">Last Donated</small>
+                <strong>{{ donor.last_donated|default:"Never" }}</strong>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- BLOOD STOCK -->
+<div class="card mb-4">
+    <div class="card-header-red">
+        <h6 class="mb-0 fw-bold"><i class="fas fa-tint me-2"></i>Current Blood Stock</h6>
+    </div>
+    <div class="card-body p-4">
+        <div class="row g-3">
+            {% for stock in blood_stock %}
+            <div class="col-md-3 col-6">
+                <div class="text-center p-3 rounded-3"
+                     style="background:{% if stock.units == 0 %}#ffebee{% elif stock.units < 5 %}#fff3e0{% else %}#e8f5e9{% endif %};
+                            border: 2px solid {% if stock.units == 0 %}#ef9a9a{% elif stock.units < 5 %}#ffcc80{% else %}#a5d6a7{% endif %};">
+                    <div class="fw-bold" style="font-size:1.5rem; color:#b71c1c;">{{ stock.blood_group }}</div>
+                    <div class="fw-bold fs-4">{{ stock.units }}</div>
+                    <small class="text-muted">units</small>
+                    {% if stock.units == 0 %}
+                        <div><span class="badge bg-danger mt-1">Critical</span></div>
+                    {% elif stock.units < 5 %}
+                        <div><span class="badge bg-warning mt-1">Low</span></div>
+                    {% else %}
+                        <div><span class="badge bg-success mt-1">Good</span></div>
+                    {% endif %}
+                </div>
+            </div>
+            {% empty %}
+            <p class="text-muted">No stock info available.</p>
+            {% endfor %}
+        </div>
+    </div>
+</div>
+
+<!-- RECENT DONATIONS -->
+<div class="card">
+    <div class="card-header-red">
+        <h6 class="mb-0 fw-bold"><i class="fas fa-history me-2"></i>Recent Donations</h6>
+    </div>
+    <div class="card-body p-0">
+        <table class="table table-hover mb-0">
+            <thead style="background:#ffeaea;">
+                <tr>
+                    <th class="ps-3">Blood Group</th>
+                    <th>Units</th>
+                    <th>Date</th>
+                    <th>Status</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for don in recent_donations %}
+                <tr>
+                    <td class="ps-3">
+                        <span class="badge" style="background:#ffeaea;color:#b71c1c;">{{ don.blood_group }}</span>
+                    </td>
+                    <td>{{ don.units }}</td>
+                    <td><small>{{ don.date_requested|date:"d M Y" }}</small></td>
+                    <td>
+                        <span class="badge bg-{% if don.status == 'Approved' %}success{% elif don.status == 'Rejected' %}danger{% else %}warning{% endif %}">
+                            {{ don.status }}
+                        </span>
+                    </td>
+                </tr>
+                {% empty %}
+                <tr><td colspan="4" class="text-center text-muted py-3">No donations yet.</td></tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+</div>
+
+{% endblock %}
+
