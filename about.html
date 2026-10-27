@@ -1,0 +1,258 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}About Us — LifeServe Blood Bank{% endblock %}
+
+{% block extra_css %}
+  <link rel="stylesheet" href="{% static 'css/base.css' %}">
+  <link rel="stylesheet" href="{% static 'css/about.css' %}">
+{% endblock %}
+
+{% block content %}
+
+<!-- Emergency Ribbon -->
+<div class="emergency-ribbon">
+  <i class="fas fa-exclamation-circle"></i>
+  Urgent Need: O-Negative &amp; AB-Negative critically low — <strong>Donate Today</strong>
+</div>
+
+<!-- NAV -->
+<nav>
+  <a href="{% url 'home' %}" class="nav-logo"><i class="fas fa-heartbeat"></i> LifeServe</a>
+  <ul class="nav-links">
+    <li><a href="{% url 'home' %}">Home</a></li>
+    <li><a href="{% url 'about' %}" class="active">About</a></li>
+    <li><a href="{% url 'blood_types' %}">Blood Types</a></li>
+    <li><a href="#">Find Blood</a></li>
+    <li><a href="#">Contact</a></li>
+  </ul>
+  <a href="{% url 'login' %}" class="nav-cta"><i class="fas fa-sign-in-alt"></i> Sign In</a>
+</nav>
+
+<!-- PAGE HERO -->
+<div class="page-hero">
+  <div class="page-hero-text">
+    <div class="page-badge"><span></span> Est. 1998 · Trusted by Millions</div>
+    <h1>We Are the <em>Bridge</em><br>Between Life<br>&amp; Hope.</h1>
+    <p>LifeServe Blood Bank has been at the heart of India's healthcare network for over 25 years — connecting generous donors with patients in their most critical moments.</p>
+    <div class="hero-badges-row">
+      <div class="badge-chip"><i class="fas fa-certificate"></i> WHO Certified</div>
+      <div class="badge-chip"><i class="fas fa-shield-alt"></i> NABH Accredited</div>
+      <div class="badge-chip"><i class="fas fa-star"></i> ISO 9001:2015</div>
+    </div>
+  </div>
+
+  <div class="page-hero-visual">
+    <div style="position:relative;">
+      <div class="about-img-grid">
+      <img src="{{ MEDIA_URL }}about/lab.jpeg" alt="Medical staff"/>
+      <img src="{{ MEDIA_URL }}about/blood sample.jpeg "alt="Blood samples"/>
+      <img src="{{ MEDIA_URL }}about/blood bank lab.jpeg" alt="blood bank"/>
+      <img src="{{ MEDIA_URL }}about/donor.jpeg "alt="donor"/>
+      </div>
+      <div class="founded-badge"><i class="fas fa-heartbeat" style="margin-right:.4rem;"></i> Saving Lives Since 1998</div>
+    </div>
+  </div>
+</div>
+
+<div class="divider"></div>
+
+<!-- MISSION & VISION -->
+<section>
+  <div class="section-label">Our Purpose</div>
+  <div class="section-title">Mission &amp; Vision</div>
+  <p class="section-sub">Everything we do is guided by one purpose: ensuring no patient dies due to lack of safe blood.</p>
+  <div class="mv-grid">
+    <div class="mv-card mission">
+      <div class="mv-icon"><i class="fas fa-bullseye"></i></div>
+      <h3>Our Mission</h3>
+      <p>To provide safe, adequate, and affordable blood and blood components to every patient in need — regardless of their economic status, location, or urgency — by maintaining a robust donor network and state-of-the-art processing infrastructure across India.</p>
+    </div>
+    <div class="mv-card vision">
+      <div class="mv-icon"><i class="fas fa-eye"></i></div>
+      <h3>Our Vision</h3>
+      <p>A future where zero lives are lost due to blood shortage. We envision a fully self-sufficient national blood supply system driven by voluntary, non-remunerated donation, powered by technology, and accessible to every Indian citizen within 60 minutes of need.</p>
+    </div>
+  </div>
+</section>
+
+<!-- STATS STRIP -->
+<div class="stats-strip">
+  <div class="stat-s"><div class="num">1998</div><div class="lbl">Year Founded</div></div>
+  <div class="stat-s"><div class="num">60+</div><div class="lbl">Centres Nationwide</div></div>
+  <div class="stat-s"><div class="num">50K+</div><div class="lbl">Lives Saved</div></div>
+  <div class="stat-s"><div class="num">12K+</div><div class="lbl">Active Donors</div></div>
+  <div class="stat-s"><div class="num">98.6%</div><div class="lbl">Safety Record</div></div>
+</div>
+
+<!-- TIMELINE -->
+<section class="timeline-section">
+  <div class="section-label">Our Journey</div>
+  <div class="section-title">25+ Years of Saving Lives</div>
+  <p class="section-sub">From a single centre in Delhi to a nationwide network — our story.</p>
+  <div class="timeline">
+    <div class="t-item">
+      <div class="t-dot"></div>
+      <div class="t-year">1998</div>
+      <h4>Founded in New Delhi</h4>
+      <p>LifeServe Blood Bank opens its first centre in Delhi with a team of 12 medical professionals and a mission to eliminate blood shortage in the capital.</p>
+    </div>
+    <div class="t-item">
+      <div class="t-dot"></div>
+      <div class="t-year">2004</div>
+      <h4>WHO Certification &amp; National Expansion</h4>
+      <p>Received World Health Organization certification for blood safety standards. Expanded to Mumbai, Chennai, and Kolkata — 10 centres now operational.</p>
+    </div>
+    <div class="t-item">
+      <div class="t-dot"></div>
+      <div class="t-year">2010</div>
+      <h4>Digital Donor Portal Launched</h4>
+      <p>Launched India's first online blood donor registration and request system, reducing average match time from 4 hours to under 45 minutes.</p>
+    </div>
+    <div class="t-item">
+      <div class="t-dot"></div>
+      <div class="t-year">2016</div>
+      <h4>Mobile Blood Collection Units</h4>
+      <p>Deployed 30 mobile blood collection vans across rural India, reaching communities with no access to fixed blood bank facilities.</p>
+    </div>
+    <div class="t-item">
+      <div class="t-dot"></div>
+      <div class="t-year">2020</div>
+      <h4>COVID-19 Emergency Response</h4>
+      <p>Coordinated plasma donation drives during the pandemic, supplying over 8,000 units of convalescent plasma to hospitals across 15 states.</p>
+    </div>
+    <div class="t-item">
+      <div class="t-dot"></div>
+      <div class="t-year">2024</div>
+      <h4>AI-Powered Blood Matching System</h4>
+      <p>Introduced AI-driven compatibility matching and predictive inventory management — cutting emergency supply time to under 30 minutes nationally.</p>
+    </div>
+  </div>
+</section>
+
+<!-- TEAM -->
+<section>
+  <div class="section-label">Leadership</div>
+  <div class="section-title">The People Behind LifeServe</div>
+  <p class="section-sub">A team of dedicated medical professionals, scientists, and operations experts united by one mission.</p>
+  <div class="team-grid">
+    <div class="team-card">
+      <div class="team-avatar" style="background:linear-gradient(135deg,#C0182A,#8B0000);">DP</div>
+      <h4>Dr. Deepak patel</h4>
+      <div class="role">Chief Medical Officer</div>
+      <div class="bio">25 years in transfusion medicine. Former WHO consultant. Spearheaded India's national blood policy reforms.</div>
+      <div class="team-socials">
+        <a href="#"><i class="fab fa-linkedin-in"></i></a>
+        <a href="#"><i class="fas fa-envelope"></i></a>
+      </div>
+    </div>
+    <div class="team-card">
+      <div class="team-avatar" style="background:linear-gradient(135deg,#e8294a,#C0182A);">MM</div>
+      <h4>Dr. Milan modh</h4>
+      <div class="role">Director of Operations</div>
+      <div class="bio">Expert in blood bank logistics and supply chain. Led expansion from 4 to 60+ centres across India.</div>
+      <div class="team-socials">
+        <a href="#"><i class="fab fa-linkedin-in"></i></a>
+        <a href="#"><i class="fas fa-envelope"></i></a>
+      </div>
+    </div>
+    <div class="team-card">
+      <div class="team-avatar" style="background:linear-gradient(135deg,#8B0000,#C0182A);">MM</div>
+      <h4>Mayur modi</h4>
+      <div class="role">Head of Technology</div>
+      <div class="bio">Built the AI matching engine and real-time inventory platform powering LifeServe's digital infrastructure.</div>
+      <div class="team-socials">
+        <a href="#"><i class="fab fa-linkedin-in"></i></a>
+        <a href="#"><i class="fas fa-envelope"></i></a>
+      </div>
+    </div>
+    <div class="team-card">
+      <div class="team-avatar" style="background:linear-gradient(135deg,#C0182A,#ff4d6d);">AC</div>
+      <h4>Anjali chauhan</h4>
+      <div class="role">Head of Donor Relations</div>
+      <div class="bio">Grew active donor base from 800 to 12,000+ through community campaigns and corporate partnerships.</div>
+      <div class="team-socials">
+        <a href="#"><i class="fab fa-linkedin-in"></i></a>
+        <a href="#"><i class="fas fa-envelope"></i></a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CORE VALUES -->
+<section class="values-section">
+  <div class="section-label">What We Stand For</div>
+  <div class="section-title">Our Core Values</div>
+  <div class="values-grid">
+    <div class="val-card"><div class="val-num">01</div><h4>Safety Above All</h4><p>Every unit of blood undergoes 8 mandatory safety screenings before release. We never compromise on donor or patient safety.</p></div>
+    <div class="val-card"><div class="val-num">02</div><h4>Equity &amp; Access</h4><p>Blood is a human right. We serve every patient regardless of their ability to pay, location, or background.</p></div>
+    <div class="val-card"><div class="val-num">03</div><h4>Transparency</h4><p>Real-time stock levels, open pricing, and full traceability from donor to recipient — complete accountability always.</p></div>
+    <div class="val-card"><div class="val-num">04</div><h4>Innovation</h4><p>From AI matching to mobile collection units, we continuously invest in technology to eliminate inefficiencies that cost lives.</p></div>
+    <div class="val-card"><div class="val-num">05</div><h4>Compassion</h4><p>Every interaction with donors, patients, and families is treated with empathy, urgency, and deep human care.</p></div>
+    <div class="val-card"><div class="val-num">06</div><h4>Community</h4><p>Our 12,000+ donors aren't customers — they're family. We celebrate, support, and grow together as a life-saving community.</p></div>
+  </div>
+</section>
+
+<!-- CERTIFICATIONS -->
+<section>
+  <div class="section-label">Accreditations</div>
+  <div class="section-title">Certified &amp; Trusted</div>
+  <p class="section-sub">LifeServe operates under the highest national and international quality standards.</p>
+  <div class="cert-row">
+    <div class="cert-badge"><i class="fas fa-globe"></i><div><div class="name">WHO Certified</div><div class="body-txt">World Health Organization</div></div></div>
+    <div class="cert-badge"><i class="fas fa-hospital"></i><div><div class="name">NABH Accredited</div><div class="body-txt">National Accreditation Board for Hospitals</div></div></div>
+    <div class="cert-badge"><i class="fas fa-certificate"></i><div><div class="name">ISO 9001:2015</div><div class="body-txt">Quality Management System</div></div></div>
+    <div class="cert-badge"><i class="fas fa-flask"></i><div><div class="name">DCGI Licensed</div><div class="body-txt">Drug Controller General of India</div></div></div>
+    <div class="cert-badge"><i class="fas fa-award"></i><div><div class="name">AABB Member</div><div class="body-txt">Advancement of Blood &amp; Biotherapies</div></div></div>
+  </div>
+</section>
+
+<!-- CTA BANNER -->
+<div class="cta-banner">
+  <h2>Be Part of Our Story.</h2>
+  <p>Join thousands of donors who have made LifeServe's mission possible. Your blood, your legacy.</p>
+  <div class="cta-btns">
+    <a href="{% url 'register_donor' %}" class="btn-white"><i class="fas fa-hand-holding-heart"></i> Register as Donor</a>
+    <a href="{% url 'register_patient' %}" class="btn-ghost"><i class="fas fa-tint"></i> Request Blood</a>
+  </div>
+</div>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-brand">
+    <a href="{% url 'home' %}" class="logo"><i class="fas fa-heartbeat"></i> LifeServe</a>
+    <p>India's most trusted blood bank network, operating since 1998. Licensed by the Ministry of Health &amp; Family Welfare.</p>
+  </div>
+  <div>
+    <h5>Quick Links</h5>
+    <ul>
+      <li><a href="{% url 'login' %}">Login</a></li>
+      <li><a href="{% url 'register_donor' %}">Donor Registration</a></li>
+      <li><a href="{% url 'register_patient' %}">Request Blood</a></li>
+      <li><a href="#">Find a Centre</a></li>
+    </ul>
+  </div>
+  <div>
+    <h5>Blood Info</h5>
+    <ul>
+      <li><a href="#">Blood Types Guide</a></li>
+      <li><a href="#">Eligibility Criteria</a></li>
+      <li><a href="#">Donation FAQs</a></li>
+      <li><a href="#">Platelet Donation</a></li>
+    </ul>
+  </div>
+  <div>
+    <h5>Contact</h5>
+    <ul>
+      <li><a href="tel:18005433737">1800-LIFESERVE</a></li>
+      <li><a href="mailto:help@lifeserve.in">help@lifeserve.in</a></li>
+      <li><a href="#">Emergency 24/7</a></li>
+    </ul>
+  </div>
+</footer>
+<div class="footer-bottom">
+  <span>© 2025 LifeServe Blood Bank. All rights reserved.</span>
+  <span>Made with ❤️ for a healthier India</span>
+</div>
+
+{% endblock %}
