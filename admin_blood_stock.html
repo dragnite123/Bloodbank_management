@@ -1,0 +1,94 @@
+{% extends 'base.html' %}
+{% block content %}
+
+<div class="d-flex justify-content-between align-items-center mb-4">
+    <div>
+        <h4 class="fw-bold mb-0" style="color:#b71c1c;"><i class="fas fa-tint me-2"></i>Blood Stock Management</h4>
+        <small class="text-muted">Add or update blood inventory</small>
+    </div>
+    <a href="/admin-dashboard/" class="btn-outline-red px-4 py-2 text-decoration-none rounded-pill">
+        <i class="fas fa-arrow-left me-1"></i>Back
+    </a>
+</div>
+
+<div class="row g-4">
+    <!-- UPDATE FORM -->
+    <div class="col-md-4">
+        <div class="card">
+            <div class="card-header-red">
+                <h6 class="mb-0 fw-bold"><i class="fas fa-plus me-2"></i>Update Stock</h6>
+            </div>
+            <div class="card-body p-4">
+                <form method="POST" action="/management/blood-stock/update/">
+                    {% csrf_token %}
+                    <div class="mb-3">
+                        <label class="form-label">Blood Group</label>
+                        <select name="blood_group" class="form-select" required>
+                            <option value="">Select Blood Group</option>
+                            <option>A+</option><option>A-</option>
+                            <option>B+</option><option>B-</option>
+                            <option>AB+</option><option>AB-</option>
+                            <option>O+</option><option>O-</option>
+                        </select>
+                    </div>
+                    <div class="mb-3">
+                        <label class="form-label">Units</label>
+                        <input type="number" name="units" class="form-control" placeholder="Number of units" min="0" required>
+                    </div>
+                    <div class="mb-4">
+                        <label class="form-label">Action</label>
+                        <select name="action" class="form-select" required>
+                            <option value="add">Add to existing stock</option>
+                            <option value="set">Set exact amount</option>
+                        </select>
+                    </div>
+                    <button type="submit" class="btn-red w-100 py-2">Update Stock</button>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <!-- STOCK TABLE -->
+    <div class="col-md-8">
+        <div class="card">
+            <div class="card-header-red">
+                <h6 class="mb-0 fw-bold"><i class="fas fa-list me-2"></i>Current Stock</h6>
+            </div>
+            <div class="card-body p-0">
+                <table class="table table-hover mb-0">
+                    <thead style="background:#ffeaea;">
+                        <tr>
+                            <th class="ps-3">Blood Group</th>
+                            <th>Units Available</th>
+                            <th>Status</th>
+                            <th>Last Updated</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for stock in stocks %}
+                        <tr>
+                            <td class="ps-3">
+                                <span class="fw-bold fs-5" style="color:#b71c1c;">{{ stock.blood_group }}</span>
+                            </td>
+                            <td class="fw-bold fs-5">{{ stock.units }}</td>
+                            <td>
+                                {% if stock.units == 0 %}
+                                    <span class="badge bg-danger">Out of Stock</span>
+                                {% elif stock.units < 5 %}
+                                    <span class="badge bg-warning">Low Stock</span>
+                                {% else %}
+                                    <span class="badge bg-success">Available</span>
+                                {% endif %}
+                            </td>
+                            <td class="text-muted small">{{ stock.updated_at|date:"d M Y, H:i" }}</td>
+                        </tr>
+                        {% empty %}
+                        <tr><td colspan="4" class="text-center text-muted py-4">No stock added yet. Use the form to add.</td></tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
