@@ -1,0 +1,85 @@
+{% extends 'base.html' %}
+{% block content %}
+<div class="row justify-content-center">
+    <div class="col-md-7">
+        <div class="card mt-4">
+            <div class="card-header-red text-center">
+                <i class="fas fa-tint fa-2x mb-2"></i>
+                <h4 class="mb-0 fw-bold">Request Blood</h4>
+                <small style="opacity:0.8;">Fill in your blood requirement details</small>
+            </div>
+            <div class="card-body p-4">
+                <form method="POST">
+                    {% csrf_token %}
+                    <div class="row">
+                        <div class="col-md-6 mb-3">
+                            <label class="form-label">Blood Group Needed</label>
+                            <div class="input-group">
+                                <span class="input-group-text"><i class="fas fa-tint"></i></span>
+                                <select name="blood_group" class="form-select" required>
+                                    <option value="">Select Blood Group</option>
+                                    <option>A+</option><option>A-</option>
+                                    <option>B+</option><option>B-</option>
+                                    <option>AB+</option><option>AB-</option>
+                                    <option>O+</option><option>O-</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="col-md-6 mb-3">
+                            <label class="form-label">Units Needed</label>
+                            <div class="input-group">
+                                <span class="input-group-text"><i class="fas fa-flask"></i></span>
+                                <input type="number" name="units_needed" class="form-control" placeholder="Units" min="1" required>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="mb-3">
+                        <label class="form-label">Urgency Level</label>
+                        <div class="input-group">
+                            <span class="input-group-text"><i class="fas fa-exclamation-circle"></i></span>
+                            <select name="urgency" class="form-select" required>
+                                <option value="">Select Urgency</option>
+                                <option value="Normal">Normal</option>
+                                <option value="Urgent">Urgent</option>
+                                <option value="Critical">Critical</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-6 mb-3">
+                            <label class="form-label">Doctor Name</label>
+                            <div class="input-group">
+                                <span class="input-group-text"><i class="fas fa-user-md"></i></span>
+                                <input type="text" name="doctor_name" class="form-control"
+                                       value="{{ patient.doctor_name }}" placeholder="Doctor Name" required>
+                            </div>
+                        </div>
+                        <div class="col-md-6 mb-3">
+                            <label class="form-label">Hospital</label>
+                            <div class="input-group">
+                                <span class="input-group-text"><i class="fas fa-hospital"></i></span>
+                                <input type="text" name="hospital" class="form-control"
+                                       value="{{ patient.hospital }}" placeholder="Hospital Name" required>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="mb-4">
+                        <label class="form-label">Reason</label>
+                        <div class="input-group">
+                            <span class="input-group-text"><i class="fas fa-notes-medical"></i></span>
+                            <textarea name="reason" class="form-control" rows="3" placeholder="Reason for blood request" required></textarea>
+                        </div>
+                    </div>
+                    <button type="submit" class="btn-red w-100 py-2">
+                        <i class="fas fa-paper-plane me-2"></i>Submit Request
+                    </button>
+                </form>
+                <p class="text-center mt-3 small text-muted">
+                    <a href="/patient-dashboard/" style="color:#b71c1c;">← Back to Dashboard</a>
+                </p>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
+
