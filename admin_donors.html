@@ -1,0 +1,76 @@
+{% extends 'base.html' %}
+{% block content %}
+
+<div class="d-flex justify-content-between align-items-center mb-4">
+    <div>
+        <h4 class="fw-bold mb-0" style="color:#b71c1c;"><i class="fas fa-users me-2"></i>Manage Donors</h4>
+        <small class="text-muted">Total: {{ donors|length }} donors</small>
+    </div>
+    <a href="/admin-dashboard/" class="btn-outline-red px-4 py-2 text-decoration-none rounded-pill">
+        <i class="fas fa-arrow-left me-1"></i>Back
+    </a>
+</div>
+
+<div class="card">
+    <div class="card-body p-0">
+        <table class="table table-hover mb-0">
+            <thead style="background:#ffeaea;">
+                <tr>
+                    <th class="ps-3">#</th>
+                    <th>Full Name</th>
+                    <th>Username</th>
+                    <th>Blood Group</th>
+                    <th>Phone</th>
+                    <th>Age</th>
+                    <th>Weight</th>
+                    <th>Status</th>
+                    <th>Actions</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for donor in donors %}
+                <tr>
+                    <td class="ps-3">{{ forloop.counter }}</td>
+                    <td>{{ donor.full_name }}</td>
+                    <td>{{ donor.username }}</td>
+                    <td><span class="badge" style="background:#ffeaea;color:#b71c1c;">{{ donor.blood_group }}</span></td>
+                    <td>{{ donor.phone }}</td>
+                    <td>{{ donor.age }}</td>
+                    <td>{{ donor.weight }} kg</td>
+                    <td>
+                        {% if donor.is_approved %}
+                            <span class="badge bg-success">Approved</span>
+                        {% else %}
+                            <span class="badge bg-warning">Pending</span>
+                        {% endif %}
+                    </td>
+                    <td>
+                       {% if not donor.is_approved %}
+<a href="/management/donors/approve/{{ donor.pk }}/" class="btn btn-sm btn-success me-1">
+    <i class="fas fa-check"></i>
+</a>
+<a href="/management/donors/reject/{{ donor.pk }}/"
+   onclick="return confirm('Reject and remove this donor?')"
+   class="btn btn-sm btn-danger me-1">
+    <i class="fas fa-times"></i>
+</a>
+{% endif %}
+                        <a href="/management/donors/edit/{{ donor.pk }}/" class="btn btn-sm btn-primary me-1">
+                            <i class="fas fa-edit"></i>
+                        </a>
+                        <a href="/management/donors/delete/{{ donor.pk }}/"
+                           onclick="return confirm('Delete this donor?')"
+                           class="btn btn-sm btn-danger">
+                            <i class="fas fa-trash"></i>
+                        </a>
+                    </td>
+                </tr>
+                {% empty %}
+                <tr><td colspan="9" class="text-center text-muted py-4">No donors registered yet.</td></tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+</div>
+{% endblock %}
+
