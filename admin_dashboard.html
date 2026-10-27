@@ -1,0 +1,235 @@
+{% extends 'base.html' %}
+{% block content %}
+
+<div class="d-flex justify-content-between align-items-center mb-4">
+    <div>
+        <h4 class="fw-bold mb-0" style="color:#b71c1c;"><i class="fas fa-tachometer-alt me-2"></i>Admin Dashboard</h4>
+        <small class="text-muted">Welcome back, Admin</small>
+    </div>
+    
+    {% if out_of_stock %}
+<div class="alert mb-4" style="background:#ffebee; border-left:4px solid #b71c1c; border-radius:12px;">
+    <h6 class="fw-bold mb-2" style="color:#b71c1c;">
+        <i class="fas fa-exclamation-circle me-2"></i>Out of Stock!
+    </h6>
+    {% for stock in out_of_stock %}
+        <span class="badge bg-danger me-1">{{ stock.blood_group }} — 0 units</span>
+    {% endfor %}
+    <div class="mt-2">
+        <small>Immediately update blood stock. <a href="/management/blood-stock/" style="color:#b71c1c;">Update now</a></small>
+    </div>
+</div>
+
+{% endif %}
+
+{% if low_stock %}
+<div class="alert mb-4" style="background:#fff3e0; border-left:4px solid #fb8c00; border-radius:12px;">
+    <h6 class="fw-bold mb-2" style="color:#e65100;">
+        <i class="fas fa-exclamation-triangle me-2"></i>Low Stock Warning
+    </h6>
+    {% for stock in low_stock %}
+        <span class="badge bg-warning me-1">{{ stock.blood_group }} — {{ stock.units }} units</span>
+    {% endfor %}
+    <div class="mt-2">
+        <small>Consider collecting more donations. <a href="/management/blood-stock/" style="color:#e65100;">Update stock</a></small>
+    </div>
+</div>
+{% endif %}
+
+
+    <span class="badge px-3 py-2" style="background:#ffeaea; color:#b71c1c; font-size:0.85rem;">
+        <i class="fas fa-shield-alt me-1"></i>Administrator
+    </span>
+</div>
+
+<!-- STAT CARDS -->
+<div class="row g-4 mb-4">
+    <div class="col-md-3 col-6">
+        <div class="stat-card" style="background:linear-gradient(135deg,#b71c1c,#e53935);">
+            <i class="fas fa-users"></i>
+            <h3>{{ total_donors }}</h3>
+            <p>Total Donors</p>
+        </div>
+    </div>
+    <div class="col-md-3 col-6">
+        <div class="stat-card" style="background:linear-gradient(135deg,#1565c0,#1e88e5);">
+            <i class="fas fa-user-injured"></i>
+            <h3>{{ total_patients }}</h3>
+            <p>Total Patients</p>
+        </div>
+    </div>
+    <div class="col-md-3 col-6">
+        <div class="stat-card" style="background:linear-gradient(135deg,#e65100,#fb8c00);">
+            <i class="fas fa-clock"></i>
+            <h3>{{ pending_donors }}</h3>
+            <p>Pending Donors</p>
+        </div>
+    </div>
+    <div class="col-md-3 col-6">
+        <div class="stat-card" style="background:linear-gradient(135deg,#2e7d32,#43a047);">
+            <i class="fas fa-check-circle"></i>
+            <h3>{{ approved_donors }}</h3>
+            <p>Approved Donors</p>
+        </div>
+    </div>
+</div>
+
+<div class="row g-4 mb-4">
+    <div class="col-md-6">
+        <div class="stat-card" style="background:linear-gradient(135deg,#6a1b9a,#ab47bc);">
+            <i class="fas fa-tint"></i>
+            <h3>{{ pending_blood_requests }}</h3>
+            <p>Pending Blood Requests</p>
+        </div>
+    </div>
+    <div class="col-md-6">
+        <div class="stat-card" style="background:linear-gradient(135deg,#00695c,#00897b);">
+            <i class="fas fa-hand-holding-heart"></i>
+            <h3>{{ pending_donation_requests }}</h3>
+            <p>Pending Donation Requests</p>
+        </div>
+    </div>
+</div>
+
+<!-- QUICK ACTIONS -->
+<div class="card mb-4">
+    <div class="card-header-red">
+        <h6 class="mb-0 fw-bold"><i class="fas fa-bolt me-2"></i>Quick Actions</h6>
+    </div>
+    <div class="card-body p-4">
+        <div class="row g-3">
+            <div class="col-md-4 col-6">
+                <a href="/management/donors/" class="btn-red d-block text-center py-3 text-decoration-none rounded-3">
+                    <i class="fas fa-users fa-lg d-block mb-1"></i>Manage Donors
+                </a>
+            </div>
+            <div class="col-md-4 col-6">
+                <a href="/management/patients/" class="btn-outline-red d-block text-center py-3 text-decoration-none rounded-3">
+                    <i class="fas fa-user-injured fa-lg d-block mb-1"></i>Manage Patients
+                </a>
+            </div>
+            <div class="col-md-4 col-6">
+                <a href="/management/blood-stock/" class="btn-red d-block text-center py-3 text-decoration-none rounded-3">
+                    <i class="fas fa-tint fa-lg d-block mb-1"></i>Blood Stock
+                </a>
+            </div>
+            <div class="col-md-4 col-6">
+                <a href="/management/blood-requests/" class="btn-outline-red d-block text-center py-3 text-decoration-none rounded-3">
+                    <i class="fas fa-file-medical fa-lg d-block mb-1"></i>Blood Requests
+                </a>
+            </div>
+            <div class="col-md-4 col-6">
+                <a href="/management/donation-requests/" class="btn-red d-block text-center py-3 text-decoration-none rounded-3">
+                    <i class="fas fa-hand-holding-heart fa-lg d-block mb-1"></i>Donations
+                </a>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- BLOOD STOCK OVERVIEW -->
+<div class="card mb-4">
+    <div class="card-header-red">
+        <h6 class="mb-0 fw-bold"><i class="fas fa-tint me-2"></i>Blood Stock Overview</h6>
+    </div>
+    <div class="card-body p-4">
+        <div class="row g-3">
+            {% for stock in blood_stock %}
+            <div class="col-md-3 col-6">
+                <div class="text-center p-3 rounded-3"
+                     style="background:{% if stock.units == 0 %}#ffebee{% elif stock.units < 5 %}#fff3e0{% else %}#e8f5e9{% endif %}; border: 2px solid {% if stock.units == 0 %}#ef9a9a{% elif stock.units < 5 %}#ffcc80{% else %}#a5d6a7{% endif %};">
+                    <div class="fw-bold" style="font-size:1.5rem; color:#b71c1c;">{{ stock.blood_group }}</div>
+                    <div class="fw-bold fs-4">{{ stock.units }}</div>
+                    <small class="text-muted">units</small>
+                    {% if stock.units == 0 %}
+                        <div><span class="badge bg-danger mt-1">Out of Stock</span></div>
+                    {% elif stock.units < 5 %}
+                        <div><span class="badge bg-warning mt-1">Low Stock</span></div>
+                    {% else %}
+                        <div><span class="badge bg-success mt-1">Available</span></div>
+                    {% endif %}
+                </div>
+            </div>
+            {% empty %}
+            <p class="text-muted">No blood stock added yet. <a href="/management/blood-stock/">Add now</a></p>
+            {% endfor %}
+        </div>
+    </div>
+</div>
+
+<!-- RECENT ACTIVITY -->
+<div class="row g-4">
+    <div class="col-md-6">
+        <div class="card h-100">
+            <div class="card-header-red">
+                <h6 class="mb-0 fw-bold"><i class="fas fa-file-medical me-2"></i>Recent Blood Requests</h6>
+            </div>
+            <div class="card-body p-0">
+                <table class="table table-hover mb-0">
+                    <thead style="background:#ffeaea;">
+                        <tr>
+                            <th class="ps-3">Patient</th>
+                            <th>Group</th>
+                            <th>Units</th>
+                            <th>Status</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for req in recent_blood_requests %}
+                        <tr>
+                            <td class="ps-3">{{ req.patient_username }}</td>
+                            <td><span class="badge" style="background:#ffeaea;color:#b71c1c;">{{ req.blood_group }}</span></td>
+                            <td>{{ req.units_needed }}</td>
+                            <td>
+                                <span class="badge bg-{% if req.status == 'Approved' %}success{% elif req.status == 'Rejected' %}danger{% else %}warning{% endif %}">
+                                    {{ req.status }}
+                                </span>
+                            </td>
+                        </tr>
+                        {% empty %}
+                        <tr><td colspan="4" class="text-center text-muted py-3">No requests yet</td></tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-6">
+        <div class="card h-100">
+            <div class="card-header-red">
+                <h6 class="mb-0 fw-bold"><i class="fas fa-hand-holding-heart me-2"></i>Recent Donations</h6>
+            </div>
+            <div class="card-body p-0">
+                <table class="table table-hover mb-0">
+                    <thead style="background:#ffeaea;">
+                        <tr>
+                            <th class="ps-3">Donor</th>
+                            <th>Group</th>
+                            <th>Units</th>
+                            <th>Status</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for don in recent_donations %}
+                        <tr>
+                            <td class="ps-3">{{ don.donor_username }}</td>
+                            <td><span class="badge" style="background:#ffeaea;color:#b71c1c;">{{ don.blood_group }}</span></td>
+                            <td>{{ don.units }}</td>
+                            <td>
+                                <span class="badge bg-{% if don.status == 'Approved' %}success{% elif don.status == 'Rejected' %}danger{% else %}warning{% endif %}">
+                                    {{ don.status }}
+                                </span>
+                            </td>
+                        </tr>
+                        {% empty %}
+                        <tr><td colspan="4" class="text-center text-muted py-3">No donations yet</td></tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
+
+{% endblock %}
+
