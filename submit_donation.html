@@ -1,0 +1,74 @@
+{% extends 'base.html' %}
+{% block content %}
+<div class="row justify-content-center">
+    <div class="col-md-6">
+        <div class="card mt-4">
+            <div class="card-header-red text-center">
+                <i class="fas fa-hand-holding-heart fa-2x mb-2"></i>
+                <h4 class="mb-0 fw-bold">Submit Donation</h4>
+                <small style="opacity:0.8;">Your donation saves lives</small>
+            </div>
+            <div class="card-body p-4">
+                <form method="POST">
+                    {% csrf_token %}
+                    <div class="mb-3">
+                        <label class="form-label">Blood Group</label>
+                        <div class="input-group">
+                            <span class="input-group-text"><i class="fas fa-tint"></i></span>
+                            <select name="blood_group" class="form-select" required>
+                                <option value="">Select Blood Group</option>
+                                <option value="A+" {% if donor.blood_group == 'A+' %}selected{% endif %}>A+</option>
+                                <option value="A-" {% if donor.blood_group == 'A-' %}selected{% endif %}>A-</option>
+                                <option value="B+" {% if donor.blood_group == 'B+' %}selected{% endif %}>B+</option>
+                                <option value="B-" {% if donor.blood_group == 'B-' %}selected{% endif %}>B-</option>
+                                <option value="AB+" {% if donor.blood_group == 'AB+' %}selected{% endif %}>AB+</option>
+                                <option value="AB-" {% if donor.blood_group == 'AB-' %}selected{% endif %}>AB-</option>
+                                <option value="O+" {% if donor.blood_group == 'O+' %}selected{% endif %}>O+</option>
+                                <option value="O-" {% if donor.blood_group == 'O-' %}selected{% endif %}>O-</option>
+                            </select>
+                        </div>
+                        <small class="text-muted">Pre-filled with your blood group</small>
+                    </div>
+                    <div class="mb-4">
+                        <label class="form-label">Units to Donate</label>
+                        <div class="input-group">
+                            <span class="input-group-text"><i class="fas fa-flask"></i></span>
+                            <input type="number" name="units" class="form-control" placeholder="Number of units" min="1" required>
+                        </div>
+                    </div>
+
+                    <!-- DONOR INFO SUMMARY -->
+                    <div class="p-3 rounded-3 mb-4" style="background:#ffeaea;">
+                        <small class="text-muted d-block mb-2 fw-bold">Your Info</small>
+                        <div class="row">
+                            <div class="col-6">
+                                <small class="text-muted">Name</small>
+                                <div class="fw-bold small">{{ donor.full_name }}</div>
+                            </div>
+                            <div class="col-6">
+                                <small class="text-muted">Blood Group</small>
+                                <div class="fw-bold small" style="color:#b71c1c;">{{ donor.blood_group }}</div>
+                            </div>
+                            <div class="col-6 mt-2">
+                                <small class="text-muted">Age</small>
+                                <div class="fw-bold small">{{ donor.age }} years</div>
+                            </div>
+                            <div class="col-6 mt-2">
+                                <small class="text-muted">Weight</small>
+                                <div class="fw-bold small">{{ donor.weight }} kg</div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <button type="submit" class="btn-red w-100 py-2">
+                        <i class="fas fa-heart me-2"></i>Submit Donation
+                    </button>
+                </form>
+                <p class="text-center mt-3 small text-muted">
+                    <a href="/donor-dashboard/" style="color:#b71c1c;">← Back to Dashboard</a>
+                </p>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
