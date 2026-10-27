@@ -1,0 +1,236 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}LifeServe Blood Bank — Home{% endblock %}
+
+{% block extra_css %}
+  <link rel="stylesheet" href="{% static 'css/base.css' %}">
+  <link rel="stylesheet" href="{% static 'css/home.css' %}">
+{% endblock %}
+
+{% block content %}
+
+<!-- Emergency Ribbon -->
+<div class="emergency-ribbon">
+  <i class="fas fa-exclamation-circle"></i>
+  Urgent Need: O-Negative &amp; AB-Negative blood types critically low — <strong>Donate Today</strong>
+</div>
+
+<!-- NAV -->
+<nav>
+  <a href="{% url 'home' %}" class="nav-logo"><i class="fas fa-heartbeat"></i> LifeServe</a>
+  <ul class="nav-links">
+    <li><a href="{% url 'home' %}" class="active">Home</a></li>
+    <li><a href="{% url 'about' %}">About</a></li>
+    <li><a href="{% url 'blood_types' %}">Blood Types</a></li>
+    <li><a href="{% url 'find_blood' %}">Find Blood</a></li>
+    <li><a href="{% url 'contact' %}">Contact</a></li>
+  </ul>
+  <a href="{% url 'login' %}" class="nav-cta"><i class="fas fa-sign-in-alt"></i> Sign In</a>
+</nav>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="hero-text">
+    <div class="hero-badge"><span></span> India's Trusted Blood Network</div>
+    <h1>Every Drop <em>Saves</em><br>A Life. Give<br>Yours Today.</h1>
+    <p>One donation can save up to three lives. Join thousands of heroes across the country who give the gift of life through LifeServe Blood Bank.</p>
+    <div class="hero-btns">
+      <a href="{% url 'register_donor' %}" class="btn-primary"><i class="fas fa-hand-holding-heart"></i> Become a Donor</a>
+      <a href="{% url 'register_patient' %}" class="btn-outline"><i class="fas fa-tint"></i> Request Blood</a>
+    </div>
+  </div>
+
+  <div class="hero-visual">
+    <div class="hero-img-wrap">
+      <img src="https://images.unsplash.com/photo-1615461066841-6116e61058f4?w=700&q=80" alt="Blood donation"/>
+      <div class="drop-deco d1">🩸</div>
+      <div class="drop-deco d2">💉</div>
+      <div class="drop-deco d3">❤️</div>
+      <div class="stat-pill p1">
+        <div class="stat-pill-icon"><i class="fas fa-users"></i></div>
+        <div class="stat-pill-info">
+          <div class="val">12,400+</div>
+          <div class="lbl">Active Donors</div>
+        </div>
+      </div>
+      <div class="stat-pill p2">
+        <div class="stat-pill-icon"><i class="fas fa-check-circle"></i></div>
+        <div class="stat-pill-info">
+          <div class="val">98.6%</div>
+          <div class="lbl">Safe Donations</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- STATS BAR -->
+<div class="stats-bar">
+  <div class="stat-item"><div class="num">50,000+</div><div class="desc">Lives Saved</div></div>
+  <div class="stat-item"><div class="num">12,400+</div><div class="desc">Registered Donors</div></div>
+  <div class="stat-item"><div class="num">8 Types</div><div class="desc">Blood Groups Available</div></div>
+  <div class="stat-item"><div class="num">24/7</div><div class="desc">Emergency Support</div></div>
+</div>
+
+<!-- BLOOD TYPES -->
+<section class="blood-types">
+  <div class="section-label">Blood Availability</div>
+  <div class="section-title">Current Stock Status</div>
+  <p class="section-sub">Live inventory updated every hour. Red = critical, amber = low, green = available.</p>
+  <div class="blood-grid">
+    <div class="blood-card"><div class="type">A+</div><div class="avail">Available</div><div class="dot"></div></div>
+    <div class="blood-card"><div class="type">A−</div><div class="avail">Low</div><div class="dot low"></div></div>
+    <div class="blood-card"><div class="type">B+</div><div class="avail">Available</div><div class="dot"></div></div>
+    <div class="blood-card"><div class="type">B−</div><div class="avail">Critical</div><div class="dot critical"></div></div>
+    <div class="blood-card"><div class="type">O+</div><div class="avail">Available</div><div class="dot"></div></div>
+    <div class="blood-card"><div class="type">O−</div><div class="avail">Critical</div><div class="dot critical"></div></div>
+    <div class="blood-card"><div class="type">AB+</div><div class="avail">Low</div><div class="dot low"></div></div>
+    <div class="blood-card"><div class="type">AB−</div><div class="avail">Critical</div><div class="dot critical"></div></div>
+  </div>
+</section>
+
+<!-- HOW IT WORKS -->
+<section>
+  <div style="text-align:center;">
+    <div class="section-label">Process</div>
+    <div class="section-title">How It Works</div>
+    <p class="section-sub" style="margin:0 auto;">Simple, safe, and fast — donate in under an hour and save up to three lives.</p>
+  </div>
+  <div class="steps">
+    <div class="step">
+      <div class="step-num">1</div>
+      <h4>Register Online</h4>
+      <p>Create your donor profile in minutes. Tell us your blood type and nearest center.</p>
+    </div>
+    <div class="step">
+      <div class="step-num">2</div>
+      <h4>Schedule Visit</h4>
+      <p>Pick a time that suits you. Walk-ins are also welcome at any of our 60+ centers.</p>
+    </div>
+    <div class="step">
+      <div class="step-num">3</div>
+      <h4>Health Screening</h4>
+      <p>A quick check of hemoglobin, pulse, and blood pressure. Takes just 5 minutes.</p>
+    </div>
+    <div class="step">
+      <div class="step-num">4</div>
+      <h4>Donate &amp; Save</h4>
+      <p>The actual donation takes only 8–10 minutes. Refresh and you're done — a hero!</p>
+    </div>
+  </div>
+</section>
+
+<!-- WHY DONATE -->
+<section style="background: rgba(255,255,255,0.015);">
+  <div class="section-label">Why It Matters</div>
+  <div class="section-title">Benefits of Donating</div>
+  <div class="why-grid">
+    <div class="why-card">
+      <div class="why-icon"><i class="fas fa-heart"></i></div>
+      <div><h4>Save Up to 3 Lives</h4><p>Your single donation is separated into red cells, plasma, and platelets — each helping a different patient.</p></div>
+    </div>
+    <div class="why-card">
+      <div class="why-icon"><i class="fas fa-heartbeat"></i></div>
+      <div><h4>Free Health Check</h4><p>Every donation includes a complimentary screening of blood pressure, hemoglobin, cholesterol, and more.</p></div>
+    </div>
+    <div class="why-card">
+      <div class="why-icon"><i class="fas fa-shield-alt"></i></div>
+      <div><h4>Reduces Heart Disease Risk</h4><p>Regular donation reduces iron buildup in the blood, lowering risk of heart attacks and cardiovascular disease.</p></div>
+    </div>
+    <div class="why-card">
+      <div class="why-icon"><i class="fas fa-sync-alt"></i></div>
+      <div><h4>Stimulates New Blood Cells</h4><p>After donation, your body replenishes lost blood, promoting production of fresh, healthy blood cells.</p></div>
+    </div>
+    <div class="why-card">
+      <div class="why-icon"><i class="fas fa-certificate"></i></div>
+      <div><h4>Donor Recognition</h4><p>Earn badges, certificates, and priority blood access for family members as you reach donation milestones.</p></div>
+    </div>
+    <div class="why-card">
+      <div class="why-icon"><i class="fas fa-users"></i></div>
+      <div><h4>Join a Community</h4><p>Become part of a network of 12,000+ life-savers. Attend donor events and connect with a cause bigger than yourself.</p></div>
+    </div>
+  </div>
+</section>
+
+<!-- URGENCY BANNER -->
+<div class="urgency">
+  <h2>Someone Needs Blood Every 2 Seconds.</h2>
+  <p>Don't wait for an emergency to think about donating. Be ready. Be a hero.</p>
+  <div class="urgency-btns">
+    <a href="{% url 'register_donor' %}" class="btn-white"><i class="fas fa-hand-holding-heart"></i> Register as Donor</a>
+    <a href="{% url 'register_patient' %}" class="btn-ghost"><i class="fas fa-tint"></i> Request Blood Now</a>
+  </div>
+</div>
+
+<!-- TESTIMONIALS -->
+<section>
+  <div class="section-label">Stories</div>
+  <div class="section-title">Lives Touched</div>
+  <div class="testimonials-grid">
+    <div class="tcard">
+      <div class="tcard-quote">"</div>
+      <p>After my accident, I needed 6 units of blood. LifeServe had it within an hour. I owe my life to anonymous donors I'll never meet but will forever be grateful for.</p>
+      <div class="tcard-author">
+        <div class="tcard-avatar">RK</div>
+        <div class="tcard-info"><div class="name">Rahul Kumar</div><div class="role">Accident Survivor, Delhi</div></div>
+      </div>
+    </div>
+    <div class="tcard">
+      <div class="tcard-quote">"</div>
+      <p>I've donated 18 times now. Each time feels like the most meaningful thing I do all year. The process is quick, the staff are warm, and the impact is immeasurable.</p>
+      <div class="tcard-author">
+        <div class="tcard-avatar">AM</div>
+        <div class="tcard-info"><div class="name">Akash Modh</div><div class="role">Regular Donor, Mumbai</div></div>
+      </div>
+    </div>
+    <div class="tcard">
+      <div class="tcard-quote">"</div>
+      <p>My daughter needed rare AB− blood during surgery. LifeServe found a match in under 2 hours. She's healthy and happy today because of this team.</p>
+      <div class="tcard-author">
+        <div class="tcard-avatar">SM</div>
+        <div class="tcard-info"><div class="name">Sneha Modh</div><div class="role">Parent, Bangalore</div></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-brand">
+    <a href="{% url 'home' %}" class="logo"><i class="fas fa-heartbeat"></i> LifeServe</a>
+    <p>India's most trusted blood bank network, operating since 1998. Licensed by the Ministry of Health &amp; Family Welfare.</p>
+  </div>
+  <div>
+    <h5>Quick Links</h5>
+    <ul>
+      <li><a href="{% url 'login' %}">Login</a></li>
+      <li><a href="{% url 'register_donor' %}">Donor Registration</a></li>
+      <li><a href="{% url 'register_patient' %}">Request Blood</a></li>
+      <li><a href="#">Find a Centre</a></li>
+    </ul>
+  </div>
+  <div>
+    <h5>Blood Info</h5>
+    <ul>
+      <li><a href="#">Blood Types Guide</a></li>
+      <li><a href="#">Eligibility Criteria</a></li>
+      <li><a href="#">Donation FAQs</a></li>
+      <li><a href="#">Platelet Donation</a></li>
+    </ul>
+  </div>
+  <div>
+    <h5>Contact</h5>
+    <ul>
+      <li><a href="tel:18005433737">1800-LIFESERVE</a></li>
+      <li><a href="mailto:help@lifeserve.in">help@lifeserve.in</a></li>
+      <li><a href="#">Emergency 24/7</a></li>
+    </ul>
+  </div>
+</footer>
+<div class="footer-bottom">
+  <span>© 2025 LifeServe Blood Bank. All rights reserved.</span>
+  <span>Made with ❤️ for a healthier India</span>
+</div>
+
+{% endblock %}
