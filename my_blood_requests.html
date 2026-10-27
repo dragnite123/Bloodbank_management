@@ -1,0 +1,62 @@
+{% extends 'base.html' %}
+{% block content %}
+
+<div class="d-flex justify-content-between align-items-center mb-4">
+    <div>
+        <h4 class="fw-bold mb-0" style="color:#b71c1c;"><i class="fas fa-list me-2"></i>My Blood Requests</h4>
+        <small class="text-muted">{{ patient.full_name }}</small>
+    </div>
+    <a href="/patient/request-blood/" class="btn-red px-4 py-2 text-decoration-none rounded-pill">
+        <i class="fas fa-plus me-1"></i>New Request
+    </a>
+</div>
+
+ <p class="text-center mt-3 small text-muted">
+                    <a href="/donor-dashboard/" style="color:#b71c1c;">← Back to Dashboard</a>
+                </p>
+
+<div class="card">
+    <div class="card-body p-0">
+        <table class="table table-hover mb-0">
+            <thead style="background:#ffeaea;">
+                <tr>
+                    <th class="ps-3">#</th>
+                    <th>Blood Group</th>
+                    <th>Units</th>
+                    <th>Urgency</th>
+                    <th>Doctor</th>
+                    <th>Hospital</th>
+                    <th>Reason</th>
+                    <th>Date</th>
+                    <th>Status</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for req in requests %}
+                <tr>
+                    <td class="ps-3">{{ forloop.counter }}</td>
+                    <td><span class="badge" style="background:#ffeaea;color:#b71c1c;">{{ req.blood_group }}</span></td>
+                    <td>{{ req.units_needed }}</td>
+                    <td>
+                        <span class="badge bg-{% if req.urgency == 'Critical' %}danger{% elif req.urgency == 'Urgent' %}warning{% else %}secondary{% endif %}">
+                            {{ req.urgency }}
+                        </span>
+                    </td>
+                    <td>{{ req.doctor_name }}</td>
+                    <td>{{ req.hospital }}</td>
+                    <td><small>{{ req.reason|truncatechars:30 }}</small></td>
+                    <td><small>{{ req.date_requested|date:"d M Y" }}</small></td>
+                    <td>
+                        <span class="badge bg-{% if req.status == 'Approved' %}success{% elif req.status == 'Rejected' %}danger{% else %}warning{% endif %}">
+                            {{ req.status }}
+                        </span>
+                    </td>
+                </tr>
+                {% empty %}
+                <tr><td colspan="9" class="text-center text-muted py-4">No blood requests yet. <a href="/patient/request-blood/" style="color:#b71c1c;">Make one now</a></td></tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+</div>
+{% endblock %}
